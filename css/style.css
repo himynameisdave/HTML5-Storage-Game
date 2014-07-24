@@ -74,6 +74,13 @@ table {
   background-color: #0ac;
   font-family: sans-serif;
   cursor: pointer;
+  color: #fff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .btn:hover {
   background-color: #00c3eb;
@@ -98,7 +105,6 @@ table {
   letter-spacing: -3px;
 }
 .menu #forget {
-  color: #333;
   background-color: #ff6666;
 }
 .menu #forget:hover {
@@ -141,4 +147,23 @@ table {
 .player-info .deet span.val {
   font-size: 2.4em;
   font-family: sans-serif;
+}
+.player-info .deet span.val#money {
+  font-size: 2em;
+}
+.player-info .deet .daybar {
+  height: 20px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.player-info .deet .daybar .inner {
+  height: 20px;
+  border-radius: 7px;
+  width: 100%;
+  position: absolute;
+  background-color: green;
 }

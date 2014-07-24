@@ -15,11 +15,9 @@ function init(){
 	var player = localStorage.getItem('player');
 
 	if(player){
-		console.log('we got a player');
 		var p = JSON.parse(player);
 		btnSetup(p);
 	}else{
-		console.log('aint no player');
 		var p = setupPlayer();
 		storeDeets(p);
 		btnSetup(p);
@@ -45,7 +43,7 @@ function updateDeets(p)	{
 	$('#name').html(p.name);
 	$('#lvl').html(p.lvl);
 	$('#XP').html(p.xp);
-	$('#money').html(p.money);
+	$('#money').html(p.money).commaAtMeBro().prepend('$');
 	$('#day').html(p.day);
 
 };
@@ -66,11 +64,40 @@ function setupForgetMe() {
 
 function setupNxtDay(p){
 
-	$('#nxt-day').on('click',function(){
-		p.day++
-		storeDeets(p);
-		updateDeets(p);
+	$('#nxt-day').on('click',function(e){
+		e.stopPropagation();
+		if(!nxtClicked){
+			advanceDay(p);
+			nxtClicked = true;
+		}
 	});
+
+};
+
+function advanceDay(p){
+
+	var i = 50;
+	var j = 0;
+	var t = setInterval(function(){
+		j = j + 10;
+		i--
+		console.log('j/10 is: ' + j/10)
+		//current width
+		var cw = parseFloat( $("#nxt-fill").css('width') );
+		console.log('nxtfillwdth: ' + cw)
+		var con =  (cw - (i/5.58) +"px");
+		$("#nxt-fill").css('width',con);
+
+		if(j >= 500){
+			clearInterval(t);
+			p.day++
+			updateDeets(p);
+			$("#nxt-fill").css('width','100%');
+			storeDeets(p);
+			nxtClicked = false;
+		}
+
+	}, 50);
 
 };
 
@@ -79,5 +106,9 @@ function btnSetup(p) {
 	setupNxtDay(p);
 };	
 
+
+
+//	nxtClicked
+var nxtClicked = false;
 
 $(document).ready(init);

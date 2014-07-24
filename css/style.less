@@ -47,6 +47,15 @@ table 					{
 	background-color: #0ac;
 	font-family: sans-serif;
 	cursor: 	pointer;
+	color:		#fff;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
 	&:hover{
 		background-color: lighten(#0ac, 6%);
 	}
@@ -75,7 +84,6 @@ table 					{
 
 	#forget {
 		
-		color:		#333;
 		background-color: #ff6666;
 		
 		&:hover{
@@ -115,7 +123,6 @@ table 					{
 		border: 		1px solid #333;
 		border-radius: 	5px;
 
-
 		h2	{
 			font-family: serif;
 			font-size: 	1.2em;
@@ -125,12 +132,32 @@ table 					{
 		span.val {
 			font-size: 		2.4em;
 			font-family: 	sans-serif;
-		}		
+			&#money{
+				font-size: 2em;
+			}
+
+		}
+		.daybar {
+
+			height: 	20px;
+			border-radius: 7px;
+			border:		1px solid #ccc;
+			width:		100%;
+			padding: 	0;
+			margin: 	0;
+			position: 	relative;
+
+			.inner {
+				height: 20px;
+				border-radius: 7px;
+				width:	100%;
+				position: absolute;
+				background-color: green;
+			}
+
+		}
+		
 	}
-
-
-	
-
 }
 
 

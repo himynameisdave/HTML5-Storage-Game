@@ -37,7 +37,12 @@ levelsMap = {
 
 };
 
-
+//a simple regex plugin that adds commas to $krilla
+$.fn.commaAtMeBro = function(){ 
+    return this.each(function(){ 
+        $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
+    })
+}
 
 
 
