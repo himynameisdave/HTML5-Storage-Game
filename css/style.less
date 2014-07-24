@@ -25,6 +25,7 @@ body 					{
 
 ol, ul 					{
 	list-style: 		none;
+	padding: 			0;
 }
 table 					{
 	border-collapse: 	collapse;
@@ -33,6 +34,61 @@ table 					{
 
 /*	End of the reset	*/
 
+
+.btn		{
+	font-size:  15px;
+	min-width: 	30px;
+	height:		20px;
+	padding:	8px;
+	display:   	inline-block;
+	margin: 	10px auto;
+	border-radius: 5px;
+	border:		1px solid #eee;
+	background-color: #0ac;
+	font-family: sans-serif;
+	cursor: 	pointer;
+	&:hover{
+		background-color: lighten(#0ac, 6%);
+	}
+	&:active{	
+		background-color: darken(#0ac, 4%);
+	}
+
+}
+
+.menu	{
+	position:  	fixed;
+	top:		20px;
+	right:		0;
+	width:		10%;
+	min-width: 	120px;
+	background-color: #eee;
+	text-align: center;
+
+	h4	{
+		font-family: serif;
+		margin: 	10px auto 0;
+		font-size: 	2em;
+		font-style: italic;
+		letter-spacing: -3px;
+	}
+
+	#forget {
+		
+		color:		#333;
+		background-color: #ff6666;
+		
+		&:hover{
+			background-color: lighten(#ff6666, 6%);
+		}
+		&:active {
+			background-color: darken(#ff6666, 4%);
+			cursor: 	crosshair;
+		}
+
+	}
+
+}
 
 
 .player-info{
@@ -43,6 +99,7 @@ table 					{
 	box-shadow: 0px 0px 8px 0px #ddd;
 	text-align: center;
 	position: 	fixed;
+	overflow-y: scroll;
 	left:		0;
 	top:		20px;
 
@@ -72,26 +129,7 @@ table 					{
 	}
 
 
-	#forget {
-		width: 		90px;
-		height:		20px;
-		padding:	8px;
-		margin: 	10px auto;
-		border-radius: 3px;
-		border:		1px solid #eee;
-		color:		#333;
-		background-color: lighten(#ff6666, 10%);
-		font-family: sans-serif;
-		cursor: 	pointer;
-		&:hover{
-			background-color: lighten(#ff6666, 20%);
-		}
-		&:active {
-			background-color: darken(#ff6666, 10%);
-			cursor: 	crosshair;
-		}
-
-	}
+	
 
 }
 

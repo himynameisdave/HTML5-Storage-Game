@@ -10,7 +10,6 @@ function init(){
 	};		
 	*/
 
-	setupForgetMe();
 
 	//First, finna check if the user exists:
 	var player = localStorage.getItem('player');
@@ -18,13 +17,15 @@ function init(){
 	if(player){
 		console.log('we got a player');
 		var p = JSON.parse(player);
+		btnSetup(p);
 	}else{
 		console.log('aint no player');
 		var p = setupPlayer();
-		localStorage.setItem('player',JSON.stringify(p));
+		storeDeets(p);
+		btnSetup(p);
 	}
 
-	setDeets(p);
+	updateDeets(p);
 
 };
 
@@ -39,7 +40,7 @@ function setupPlayer() 	{
 	return p;
 };
 
-function setDeets(p)	{
+function updateDeets(p)	{
 
 	$('#name').html(p.name);
 	$('#lvl').html(p.lvl);
@@ -49,16 +50,34 @@ function setDeets(p)	{
 
 };
 
+function storeDeets(p){
+	localStorage.setItem('player',JSON.stringify(p));
+};
+
 function setupForgetMe() {
 
 	$('#forget').on('click',function(){
 		alert('You are forgotten. Refreshing the page');
 		localStorage.clear();
 		location.reload();
-	})
+	});
 
 };
 
+function setupNxtDay(p){
+
+	$('#nxt-day').on('click',function(){
+		p.day++
+		storeDeets(p);
+		updateDeets(p);
+	});
+
+};
+
+function btnSetup(p) {
+	setupForgetMe();
+	setupNxtDay(p);
+};	
 
 
 $(document).ready(init);
