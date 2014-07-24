@@ -48,9 +48,11 @@ nav,
 section {
   display: block;
 }
-body {
+body,
+html {
   line-height: 1;
   color: #333;
+  height: 100%;
 }
 ol,
 ul {
@@ -166,4 +168,25 @@ table {
   width: 100%;
   position: absolute;
   background-color: green;
+}
+.modial {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(50, 50, 50, 0.7);
+  text-align: center;
+}
+.modial .inner-modial {
+  width: 40%;
+  height: 40%;
+  min-width: 450px;
+  min-height: 281.25px;
+  background-color: #eee;
+  padding: 50px;
+  margin: 5% auto 0;
+  font-size: 1.6em;
 }

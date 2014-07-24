@@ -90,6 +90,7 @@ function advanceDay(p){
 
 		if(j >= 500){
 			clearInterval(t);
+			endOfDaySummary(p.day);
 			p.day++
 			updateDeets(p);
 			$("#nxt-fill").css('width','100%');
@@ -100,6 +101,27 @@ function advanceDay(p){
 	}, 50);
 
 };
+
+
+function endOfDaySummary(day){
+
+	var a = "<div class='modial'>";
+	var b = "<div class='inner-modial'>";
+	var c = "End of day " + day + "!<br/>";
+	var d = "<div id='close-modial' class='btn'>Close";
+	var e = "</div></div></div>";
+
+	var mod = a+b+c+d+e;
+
+	$('body').append(mod);
+
+	$('#close-modial').on('click',function(e){
+		e.stopPropagation();
+		$('.modial').remove();
+	});
+
+};
+
 
 function btnSetup(p) {
 	setupForgetMe();
