@@ -1,0 +1,100 @@
+/* 	The following is an modified version of Meyer's famous 
+	CSS Reset, found at http://meyerweb.com/eric/tools/css/reset/ */
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
+a, form, label, table, caption, tbody, 
+tfoot, thead, tr, th, td, canvas, footer, header, 
+menu, nav 				{
+	margin: 			0;
+	padding: 			0;
+	border: 			0;
+	font-size: 			100%;
+	font: 				inherit;
+	vertical-align:		baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section 
+						{
+	display: 			block;
+}
+body 					{
+	line-height: 		1;
+	color:				#333;
+}
+
+ol, ul 					{
+	list-style: 		none;
+}
+table 					{
+	border-collapse: 	collapse;
+	border-spacing: 	0;
+}
+
+/*	End of the reset	*/
+
+
+
+.player-info{
+	width:		20%;
+	min-width: 	300px;
+	padding: 	25px;
+	min-height: 100px;
+	box-shadow: 0px 0px 8px 0px #ddd;
+	text-align: center;
+	position: 	fixed;
+	left:		0;
+	top:		20px;
+
+	h1	{
+		font-size: 	 1.5em;
+		font-family: sans-serif;
+		margin: 	10px auto 25px;
+	}
+	.deet 	{
+		width:			70%;
+		padding: 		10px;
+		margin: 		20px auto;
+		border: 		1px solid #333;
+		border-radius: 	5px;
+
+
+		h2	{
+			font-family: serif;
+			font-size: 	1.2em;
+			background-color: #fff;
+			margin: 	-20px auto 10px;
+		}
+		span.val {
+			font-size: 		2.4em;
+			font-family: 	sans-serif;
+		}		
+	}
+
+
+	#forget {
+		width: 		90px;
+		height:		20px;
+		padding:	8px;
+		margin: 	10px auto;
+		border-radius: 3px;
+		border:		1px solid #eee;
+		color:		#333;
+		background-color: lighten(#ff6666, 10%);
+		font-family: sans-serif;
+		cursor: 	pointer;
+		&:hover{
+			background-color: lighten(#ff6666, 20%);
+		}
+		&:active {
+			background-color: darken(#ff6666, 10%);
+			cursor: 	crosshair;
+		}
+
+	}
+
+}
+
+
+
+
