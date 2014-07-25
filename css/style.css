@@ -190,3 +190,18 @@ table {
   margin: 5% auto 0;
   font-size: 1.6em;
 }
+.projects {
+  width: 30%;
+  min-width: 200px;
+  margin: 100px auto;
+  padding: 25px;
+  min-height: 50px;
+  text-align: center;
+}
+.projects table {
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+.projects table td {
+  padding: 5px;
+}
