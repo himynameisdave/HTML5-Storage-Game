@@ -45,8 +45,8 @@ function Project(level){
 
 	this.days		= Math.round(this.funNum / 2);
 	this.daysLeft	= this.days; 
-	this.billings	= this.funNum * rn(2,4);
-	this.xpGiven	= (this.funNum * rn(2,4)) + this.billings/2;
+	this.xpGiven	= this.funNum * rn(2,4)
+	this.billings	= this.funNum * rn(2,4) + this.xpGiven/2;
 
 	this.client		= findMeAClient(lvl);
 

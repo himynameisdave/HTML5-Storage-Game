@@ -54,11 +54,41 @@ function storeDeets(p){
 };
 
 function updateProjects(p,proj){
+	//check if user has any current projects goin on
+	if(!$.isEmptyObject(p.currentProjects)){
+		
+		var len = Object.keys(p.currentProjects).length;
+		for (k = 1; k <= len; k++){
+			var i = 'proj' + k;	
+			p.currentProjects[i].daysLeft--
+			storeDeets(p);
+			drawProj(p.currentProjects[i]);
+		};
 
-	console.log('Updating Project ' + proj.client);
+	}else{
+		p.currentProjects['proj1'] = proj;
+		storeDeets(p);
+		drawProj(proj);
+	}
 
+	
 
 };
+
+function drawProj(proj){
+
+	$('.projects').empty();
+	
+	var draw = 	""+
+				"<div class='project'>"+
+				"<h6>The <strong>" + proj.client + "</strong> Project!</h6>"+
+				"<span><b>Billings: </b>" + proj.billings + "</span><br/>"+
+				"<span><b>Days Left:</b>" + proj.daysLeft + "</span><br/>"+
+				"<span><b>XP:</b>" + proj.xpGiven + "</span>"+
+				"</div>"
+
+	$('.projects').append(draw);
+}
 
 function setupForgetMe() {
 
@@ -108,7 +138,9 @@ function advanceDay(p){
 
 function randomDayEvents(p){
 
-	var r = rn(1,3);
+	//time being
+	// var r = rn(1,3);
+	var r = rn(2,2);
 
 	var c = {};
 	if(r==2){
@@ -137,7 +169,9 @@ function endOfDaySummary(p){
 	showModial(randomEvent.con + 'End of day ' + p.day + '!<br/>');
 	if(randomEvent.proj){
 		updateProjects(p,randomEvent.proj);
-	};
+	}else{
+		updateProjects(p);
+	}
 	p.day++
 	updateDeets(p);
 	$("#nxt-fill").css('width','100%');
