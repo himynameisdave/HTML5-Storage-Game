@@ -123,7 +123,7 @@ table {
   min-height: 100px;
   box-shadow: 0px 0px 8px 0px #ddd;
   text-align: center;
-  position: fixed;
+  position: absolute;
   overflow-y: scroll;
   left: 0;
   top: 20px;
