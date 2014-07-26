@@ -1,15 +1,7 @@
-//	Written by Dave Lunny
+//	Welcome to the HTML5 localstorage game
+//	Also known as Dev Tycoon
+
 function init(){	
-
-	//Level-mapping, for later use
-	/*
-	var x;
-	var thisXp = 1
-	for( x in levelsMap ){
-		thisXp = levelsMap[x];
-	};		
-	*/
-
 
 	//First, finna check if the user exists:
 	var player = localStorage.getItem('player');
@@ -122,7 +114,16 @@ function endOfDaySummary(p){
 	//	Check to see if we're even supposed to gen a rand evnt
 	if(isARandomEvent) {
 
-		if(Object.keys(p.currentProjects).length < p.devcap){
+		var numCurrProjs = 0;
+		//loop through events for any that are > 0 daysLeft
+		for(i=1;i<=Object.keys(p.currentProjects).length;i++){
+			var pro = 'proj'+i;
+			if(p.currentProjects[pro].daysLeft > 0){
+				numCurrProjs++;
+			}
+		};
+
+		if(numCurrProjs < p.devcap){
 			var randomEvent = gimmieARandomEvent(p);
 
 			var newProjName = 'proj' + (Object.keys(p.currentProjects).length + 1);
@@ -218,9 +219,11 @@ function updateProjects(p){
 		$('.projects').empty();
 		for (k = 1; k <= len; k++){
 			var i = 'proj' + k;	
-			drawProj(p.currentProjects[i]);
+			if(p.currentProjects[i].daysLeft > 0){
+				drawProj(p.currentProjects[i]);
+			}
 		};
-
+	
 	}
 
 };
@@ -246,9 +249,18 @@ function decrementProjectDaysLeft(p){
 	for (k = 1; k <= len; k++){
 		var i = 'proj' + k;	
 		p.currentProjects[i].daysLeft--
+		if(p.currentProjects[i].daysLeft == 0){
+			completeProject(p,p.currentProjects[i]);
+		}
 	}
 
 };
+
+function completeProject(p,proj){
+	p.money += proj.billings;
+	p.xp += proj.xpGiven;
+};
+
 
 /*				END UPDATING PROJECTS					*/
 
