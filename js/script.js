@@ -64,8 +64,13 @@ function storeDeets(p){
 
 //Goes in and changes the displayed deets to reflect those passed to it
 function updateDeets(p)	{
+
+	//Should make all this stuff happen on the condition of it being changed/diff
+	//so that it isn't redrawn each time if there is no change=
+
 	$('#name').html(p.name);
 	$('#lvl').html(p.lvl);
+	//Update level bar
 	$('#XP').html(p.xp);
 	$('#money').html(p.money).commaAtMeBro().prepend('$');
 	$('#day').html(p.day);
@@ -92,9 +97,9 @@ function advanceDay(p){
 		i--
 
 		//current width
-		var cw = parseFloat( $("#nxt-fill").css('width') );
+		var cw = parseFloat( $("#day-fill").css('width') );
 		var con =  (cw - (i/5.58) +"px");
-		$("#nxt-fill").css('width',con);
+		$("#day-fill").css('width',con);
 
 		if(j >= 500){
 			clearInterval(t);
@@ -110,6 +115,7 @@ function endOfDaySummary(p){
 
 	var isARandomEvent = randomEventGen();
 	var standardMsg = "End of Day" + p.day + "<br/>";
+	var dayEnd = true;
 
 	//	Check to see if we're even supposed to gen a rand evnt
 	if(isARandomEvent) {
@@ -131,15 +137,15 @@ function endOfDaySummary(p){
 			p.currentProjects[newProjName] = randomEvent[0];
 
 			var tellModial = randomEvent[1] + standardMsg;
-			showModial(tellModial,p);
+			showModial(tellModial,p,dayEnd);
 
 		}else{
 			standardMsg += "What a great day to be developing!<br/>";
-			showModial(standardMsg,p);
+			showModial(standardMsg,p,dayEnd);
 		}	
 
 	}else{
-		showModial(standardMsg,p);
+		showModial(standardMsg,p,dayEnd);
 	}
 
 };
@@ -174,30 +180,34 @@ function randomEventGen()	{
 /*				SHOWING AND HIDING THE MODIAL						*/
 
 //	Takes a message (html welcome) and adds it to the modial which is added to the page
-function showModial(msg,p){
+function showModial(msg,p,dayEnd){
 	var a = "<div class='modial'><div class='inner-modial'>";
 	var b = "<div id='close-modial' class='btn'>Close</div></div></div>";
 	var mod = a+msg+b;
 	$('body').append(mod);
 	$('#close-modial').on('click',function(e){
 		e.stopPropagation();
-		closeModial(p);
+		closeModial(p,dayEnd);
 	});
 };
 
 //	Closes the modial, advances the day forward, and gets shit ready for the next day
-function closeModial(p) {
+function closeModial(p,dayEnd) {
 
 	$('.modial').remove();
-	$("#nxt-fill").css('width','100%');
-	p.day++
 
-	if(!$.isEmptyObject(p.currentProjects)){
-		decrementProjectDaysLeft(p);
+	if(dayEnd){
+		$("#day-fill").css('width','100%');
+		p.day++
+
+		if(!$.isEmptyObject(p.currentProjects)){
+			decrementProjectDaysLeft(p);
+		}
+		updateLevel(p);
+		updateProjects(p);
+		updateDeets(p);
+		storeDeets(p);
 	}
-	updateProjects(p);
-	updateDeets(p);
-	storeDeets(p);
 	nxtClicked = false;
 };
 
@@ -265,7 +275,66 @@ function completeProject(p,proj){
 /*				END UPDATING PROJECTS					*/
 
 
+/*				UPDATING THE LEVEL 						*/
 
+function updateLevel(p)	{
+
+	var totalWidth = parseFloat( $("#lvl-fill").parent().css('width') )
+	var nli = nextLevelIn(p);
+
+	if(nli[2]){
+		p.lvl++;
+		var str = 	"<div class='lvl-up-text'>"+
+					"LEVEL UP!<br/>"+
+					"You are now level "+
+					p.lvl +
+					"!</div>";
+
+		showModial(str,p,false);
+		updateDeets(p);
+		storeDeets(p);
+		updateLevel(p);
+	}else{
+		var per = (((nli[1] / nli[0])/100) * totalWidth) + 'px';
+		$("#lvl-fill").css('width',per);
+		if($("#lvl-fill").parent().find(".xp-to-next")){
+			$("#lvl-fill").parent().find(".xp-to-next").remove();
+		}
+		var l = p.lvl;
+		var othrStr = "<div class='xp-to-next'>XP to level "+(l+1)+": "+nli[1]+"</div>"
+		$("#lvl-fill").parent().append(othrStr);
+	}
+
+};
+
+
+
+
+//	returns how much xp is needed to reach the next level, as well as the total difference
+//	in xp between the current level and the next level
+function nextLevelIn(p)		{
+	var lvl 	= 'lvl'+p.lvl;
+	var nxtlvl 	= 'lvl'+(p.lvl+1);
+
+	//nli == next level in
+	var nli = [];
+
+	//	The difference between the current level and next
+	nli[0] = levelsMap[nxtlvl] - levelsMap[lvl];
+	//	The difference between the next level and the current level
+	nli[1] = levelsMap[nxtlvl] - p.xp;
+	//	bool, whether there is a level up or not
+	if(nli[1] < 0){
+		nli[2] = true;
+	}else{
+		nli[2] = false;
+	}
+
+	return nli;
+};
+
+
+/*				END UPDATING THE LEVEL 					*/
 
 //	nxtClicked
 var nxtClicked = false;
