@@ -181,20 +181,39 @@ function randomEventGen()	{
 
 //	Takes a message (html welcome) and adds it to the modial which is added to the page
 function showModial(msg,p,dayEnd){
-	var a = "<div class='modial'><div class='inner-modial'>";
-	var b = "<div id='close-modial' class='btn'>Close</div></div></div>";
-	var mod = a+msg+b;
-	$('body').append(mod);
-	$('#close-modial').on('click',function(e){
-		e.stopPropagation();
-		closeModial(p,dayEnd);
-	});
+
+	//see if there is a modial already
+
+	if($('body').find('.modial')){
+
+		var modNum = ($('.modial').length) + 1;
+		var a = "<div id='modial-"+modNum+"' class='modial'><div class='inner-modial'>";
+		var b = "<div id='close-modial-"+modNum+"' class='btn'>Close</div></div></div>";
+		var mod = a+msg+b;
+		$('body').append(mod);
+		$( ('#close-modial-'+modNum) ).on('click',function(e){
+			e.stopPropagation();
+			closeModial(p,dayEnd,modNum);
+		});
+
+	}else{
+		var a = "<div id='modial-1' class='modial'><div class='inner-modial'>";
+		var b = "<div id='close-modial-1' class='btn'>Close</div></div></div>";
+		var mod = a+msg+b;
+		$('body').append(mod);
+		$('#close-modial-1').on('click',function(e){
+			e.stopPropagation();
+			closeModial(p,dayEnd,1);
+		});
+	}
+
+	
 };
 
 //	Closes the modial, advances the day forward, and gets shit ready for the next day
-function closeModial(p,dayEnd) {
+function closeModial(p,dayEnd,mn) {
 
-	$('.modial').remove();
+	$('#modial-'+mn).remove();
 
 	if(dayEnd){
 		$("#day-fill").css('width','100%');
