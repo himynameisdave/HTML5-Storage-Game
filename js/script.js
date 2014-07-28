@@ -314,14 +314,18 @@ function updateLevel(p)	{
 		storeDeets(p);
 		updateLevel(p);
 	}else{
-		var per = (((nli[1] / nli[0])/100) * totalWidth) + 'px';
-		$("#lvl-fill").css('width',per);
+		var per = (100 - ((nli[1] / nli[0])*100)) + "%";
+
+		$("#lvl-fill").css("width",per);
+
 		if($("#lvl-fill").parent().find(".xp-to-next")){
 			$("#lvl-fill").parent().find(".xp-to-next").remove();
 		}
 		var l = p.lvl;
-		var othrStr = "<div class='xp-to-next'>XP to level "+(l+1)+": "+nli[1]+"</div>"
+		var othrStr =  "<div class='xp-to-next'>XP to level "+(l+1)+": "+nli[1]+"</div>";
 		$("#lvl-fill").parent().append(othrStr);
+
+		$("#lvl-fill").width(per);
 	}
 
 };
@@ -338,17 +342,19 @@ function nextLevelIn(p)		{
 	//nli == next level in
 	var nli = [];
 
+
 	//	The difference between the current level and next
 	nli[0] = levelsMap[nxtlvl] - levelsMap[lvl];
 	//	The difference between the next level and the current level
 	nli[1] = levelsMap[nxtlvl] - p.xp;
 	//	bool, whether there is a level up or not
-	if(nli[1] < 0){
+	if(nli[1] <= 0){
 		nli[2] = true;
 	}else{
 		nli[2] = false;
 	}
 
+	// console.log(nli);
 	return nli;
 };
 
