@@ -11,5 +11,7 @@ The user advances day through day, each day taking roughly 5 seconds irl, random
 
 
 ####Screener:
-!(https://s3.amazonaws.com/uploads.hipchat.com/108401/799964/0lpI14c6oVwyr3R/Screen%20Shot%202014-07-28%20at%2010.17.45%20PM.png)
+
+![screener](https://s3.amazonaws.com/uploads.hipchat.com/108401/799964/0lpI14c6oVwyr3R/Screen%20Shot%202014-07-28%20at%2010.17.45%20PM.png)
+
 ######(wow ugly UI so far, Dave!)
