@@ -16,6 +16,7 @@ function init(){
 	btnSetup(p);
 
 	updateDeets(p);
+	updateLevel(p);
 	updateProjects(p);
 };
 
@@ -291,6 +292,14 @@ function decrementProjectDaysLeft(p){
 function completeProject(p,proj){
 	p.money += proj.billings;
 	p.xp += proj.xpGiven;
+
+	var con = 	"<div class='proj-end'>End of that "+
+				proj.client+" project!<br/>"+
+				"You made a sweet $"+proj.billings+
+				"!</div>";
+
+	showModial(con,p,false);
+
 };
 
 
@@ -315,7 +324,7 @@ function updateLevel(p)	{
 		//Every 3 levels you're devcap goes up? (Make better later)
 		if( (p.lvl % 3) == 0){	
 			p.devcap++
-			str += "Your now have " + p.devcap + " developers working for you!<br/>";
+			str += "You now have " + p.devcap + " developers working for you!<br/>";
 		}
 
 		str += "</div>";
@@ -333,7 +342,7 @@ function updateLevel(p)	{
 			$("#lvl-fill").parent().find(".xp-to-next").remove();
 		}
 		var l = p.lvl;
-		var othrStr =  "<div class='xp-to-next'>XP to level "+(l+1)+": "+nli[1]+"</div>";
+		var othrStr =  "<div class='xp-to-next'>XP to lvl up: "+nli[1]+"</div>";
 		$("#lvl-fill").parent().append(othrStr);
 
 		$("#lvl-fill").width(per);

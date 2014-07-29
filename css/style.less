@@ -151,6 +151,9 @@ table 					{
 			margin: 	0;
 			position: 	relative;
 
+			background-color: 	#ddd;
+
+
 			.inner {
 				height: 20px;
 				border-radius: 7px;
@@ -179,14 +182,20 @@ table 					{
 					background: -ms-linear-gradient(top,  #ff3b26 0%,#e50000 100%); /* IE10+ */
 					background: linear-gradient(to bottom,  #ff3b26 0%,#e50000 100%); /* W3C */
 					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3b26', endColorstr='#e50000',GradientType=0 ); /* IE6-9 */
+					z-index: 	100;
 				}
-				&.xp-to-next{
-					position: absolute;
-					width: 		50%;
-					left:		25%;
-					margin: 	0;
-					top:		5px;
-				}
+
+			}	
+			.xp-to-next{
+				position: absolute;
+				width: 		50%;
+				left:		25%;
+				margin: 	0;
+				top:		2px;
+				color:		#fff;
+				z-index: 	300;
+				font: 		14px sans-serif;
+				text-shadow: 0 0 4px #333;
 			}
 
 		}
@@ -204,6 +213,7 @@ table 					{
 	padding: 0;
 	background-color: rgba(50,50,50,0.7);
 	text-align: center;	
+	z-index: 9000;
 	.inner-modial{
 		width:	40%;
 		height:	40%;
