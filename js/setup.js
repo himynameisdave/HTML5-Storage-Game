@@ -31,7 +31,7 @@ function Player(name){
 	this.name  	= name;
 	this.lvl   	= 1;
 	this.xp	   	= 75;
-	this.money 	= 10000;
+	this.money 	= 100;
 	this.devcap = 1;
 	this.day	= 1;
 	this.currentProjects = {};
@@ -126,11 +126,27 @@ clientsMap = {
 	,	'lvl14': 	["Hugo Boss","Harry Rosen","Canada Goose"]
 	,	'lvl15': 	["Forever 21","Louis Vutton","Prada"]
 	,	'lvl16': 	["Untitled Bar","No Name Pub","Drinky McBeersys"]
-	,	'lvl17': 	["Bina's Bellydancing School","Dan's Dogwalkers"]
+	,	'lvl17': 	["Bina's Bellydancing School","Dan's Dogwalkers","Deacon's (Better) Dogwalkers"]
 	,	'lvl18': 	["Google","Trello","X Tech Solutions"]
 	,	'lvl19': 	["Nike","Apple","Gucci"]
 	,	'lvl20': 	["Smoke's Poutine","Honest Ed's","TTC"]
 
 };
 
-
+randomPhrases = [
+	
+		"What a great day to be developing!"
+	,	"Your eyes start to hurt from staring at code all day..."
+	,	"More coffee, please!"
+	,	"I'd really like some more coffee, please!"
+	,	"Poutine, forever."
+	,	"if(coffee){production++}"
+	,	"'I'd like to >div< her legs, if ya know what I mean...'"
+	,	"Your developers are hard at work"
+	,	"'Thompson, did you file the expense reports ya old bag of hockey pucks!?'"
+	,	"'Jenkins, dammit, did you commit your work!?'"
+	,	"Is it Friday?"
+	,	"Mondays, amirite?"
+	,	"'Jefferson, you're coming in this weekend to get the project done dammit!"
+	
+];

@@ -77,6 +77,22 @@ function updateDeets(p)	{
 	$('#day').html(p.day);
 };
 
+function generateRandMsg(type){
+
+	var rpl = randomPhrases.length
+
+	switch(type){
+
+		case 'rand':
+			return randomPhrases[rn(0,rpl)]; 
+		break;
+
+		default:
+			return randomPhrases[rn(0,rpl)]; 
+
+	};
+
+};
 
 /*///////////END SETUP AND STORAGE FUNCTIONS//////////*/
 
@@ -115,7 +131,7 @@ function advanceDay(p){
 function endOfDaySummary(p){
 
 	var isARandomEvent = randomEventGen();
-	var standardMsg = "End of Day" + p.day + "<br/>";
+	var standardMsg = "End of Day " + p.day + "<br/>";
 	var dayEnd = true;
 
 	//	Check to see if we're even supposed to gen a rand evnt
@@ -141,7 +157,7 @@ function endOfDaySummary(p){
 			showModial(tellModial,p,dayEnd);
 
 		}else{
-			standardMsg += "What a great day to be developing!<br/>";
+			standardMsg +=  generateRandMsg('rand')+"<br/>";
 			showModial(standardMsg,p,dayEnd);
 		}	
 
@@ -155,14 +171,32 @@ function endOfDaySummary(p){
 //	for the modial that goes along with it
 function gimmieARandomEvent(p)	{
 
+	var cx = false;
+	var tooMuchTooMuch = 0;
 	var evnt = [];
-	evnt[0] = new Project(p.lvl);
+	
+/*SECTION NOT WORKING RN*/	
+	function newProject(){
+		evnt[0] = new Project(p.lvl);
+		var cx = checkIfClientExists(p,evnt[0].client);
+	}
+
+	newProject();
+
+	while(cx || tooMuchTooMuch < 5){
+		newProject();
+		tooMuchTooMuch++
+	};
+/*SECTION NOT WORKING RN*/	
+
+
 	evnt[1] = 	""+
 				"<span class='new-proj'>NEW!</span><br/>"+
 				"Looks like you got a new project! Cool!<br/>"+
-				"The company is " + evnt[0].client + " and they are offering a handsome " + 
-				evnt[0].billings + " for the project which will take " + evnt[0].days + "days to complete.<br/>"+
-				"This project awards " + evnt[0].xpGiven + "XP upon completion"+
+				"The company is " + evnt[0].client + " and they are offering a handsome $" + 
+				evnt[0].billings + " for the project.<br/>"+
+				"It will take a grueling " + evnt[0].days + " days to complete.<br/>"+
+				"This project awards " + evnt[0].xpGiven + "XP upon completion!"+
 				"<br/>";
 	return evnt
 
@@ -176,6 +210,18 @@ function randomEventGen()	{
 	}else{
 		return false
 	}
+};
+
+function checkIfClientExists(p,cli){
+
+	var sirEdwardFrankfurdLongnameForASimpleBoolean = false;
+	for(i=1;i<=Object.keys(p.currentProjects).length;i++){
+		var pro = 'proj'+i;
+		if(p.currentProjects[pro].client == cli){
+			sirEdwardFrankfurdLongnameForASimpleBoolean = true;
+		}
+	};
+	return sirEdwardFrankfurdLongnameForASimpleBoolean;
 };
 
 /*				SHOWING AND HIDING THE MODIAL						*/
@@ -267,9 +313,9 @@ function drawProj(proj){
 	var draw = 	""+
 				"<div class='project'>"+
 				"<h6>The <strong>" + proj.client + "</strong> Project!</h6>"+
-				"<span><b>Billings: </b>" + proj.billings + "</span><br/>"+
-				"<span><b>Days Left:</b>" + proj.daysLeft + "</span><br/>"+
-				"<span><b>XP:</b>" + proj.xpGiven + "</span>"+
+				"<span><b>Billings: </b>$" + proj.billings + "</span><br/>"+
+				"<span><b>Days Left: </b>" + proj.daysLeft + "</span><br/>"+
+				"<span><b>XP: </b>" + proj.xpGiven + "</span>"+
 				"</div>"
 
 	$('.projects').append(draw);
@@ -381,7 +427,10 @@ function nextLevelIn(p)		{
 
 /*				END UPDATING THE LEVEL 					*/
 
+/*		DISCOUNT VARIABLES BIN		*/
 //	nxtClicked
 var nxtClicked = false;
+var ModialMsg = [];
+/*		/DISCOUNT VARIABLES BIN 	*/
 
 $(document).ready(init);
