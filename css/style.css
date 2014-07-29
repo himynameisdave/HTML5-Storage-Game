@@ -53,6 +53,8 @@ html {
   line-height: 1;
   color: #333;
   height: 100%;
+  min-height: 100%;
+  background-color: rgba(244, 244, 244, 0.95);
 }
 ol,
 ul {
@@ -117,16 +119,17 @@ table {
   cursor: crosshair;
 }
 .player-info {
-  width: 20%;
+  width: 15%;
   min-width: 300px;
-  padding: 25px;
-  min-height: 100px;
+  padding: 3%;
+  height: 84%;
+  margin: 1% 0 0 1%;
   box-shadow: 0px 0px 8px 0px #ddd;
+  background-color: #fff;
   text-align: center;
-  position: fixed;
+  position: relative;
+  float: left;
   overflow-y: scroll;
-  left: 0;
-  top: 20px;
 }
 .player-info h1 {
   font-size: 1.5em;
@@ -241,18 +244,28 @@ table {
   font-size: 30px;
   font-weight: bold;
 }
-.projects {
-  width: 30%;
+.main {
+  float: left;
+  width: 60%;
   min-width: 200px;
-  margin: 100px auto;
-  padding: 25px;
+  height: 90%;
+  margin: 1%;
+  box-shadow: 0px 0px 8px 0px #ddd;
+  background-color: #fff;
+}
+.main .projects {
+  position: relative;
+  width: 98%;
+  margin: 0;
+  padding: 1%;
   min-height: 50px;
   text-align: center;
 }
-.projects table {
-  border-collapse: collapse;
-  border: 1px solid #333;
+.main .projects .project {
+  width: 100%;
+  padding: 25px 0;
+  border-bottom: 1px solid #eee;
 }
-.projects table td {
-  padding: 5px;
+.main .projects .project:nth-of-type(odd) {
+  background-color: #b8edff;
 }

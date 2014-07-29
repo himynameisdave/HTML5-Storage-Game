@@ -70,9 +70,9 @@ function updateDeets(p)	{
 
 	$('#name').html(p.name);
 	$('#lvl').html(p.lvl);
-	//Update level bar
 	$('#XP').html(p.xp);
 	$('#money').html(p.money).commaAtMeBro().prepend('$');
+	$('#dev-cap').html(p.devcap)
 	$('#day').html(p.day);
 };
 
@@ -245,7 +245,10 @@ function updateProjects(p){
 	if(!$.isEmptyObject(p.currentProjects)){
 
 		var len = Object.keys(p.currentProjects).length;
+		var head = "<h3>Current Projects!</h3>";
+
 		$('.projects').empty();
+		$('.projects').append(head);
 		for (k = 1; k <= len; k++){
 			var i = 'proj' + k;	
 			if(p.currentProjects[i].daysLeft > 0){
@@ -303,11 +306,19 @@ function updateLevel(p)	{
 
 	if(nli[2]){
 		p.lvl++;
+
 		var str = 	"<div class='lvl-up-text'>"+
 					"LEVEL UP!<br/>"+
 					"You are now level "+
-					p.lvl +
-					"!</div>";
+					p.lvl + "!<br/>";
+
+		//Every 3 levels you're devcap goes up? (Make better later)
+		if( (p.lvl % 3) == 0){	
+			p.devcap++
+			str += "Your now have " + p.devcap + " developers working for you!<br/>";
+		}
+
+		str += "</div>";
 
 		showModial(str,p,false);
 		updateDeets(p);
