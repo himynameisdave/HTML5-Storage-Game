@@ -72,7 +72,7 @@ table {
   height: 20px;
   padding: 8px;
   display: inline-block;
-  margin: 10px auto;
+  margin: 8px auto;
   border-radius: 5px;
   border: 1px solid #eee;
   background-color: #0ac;
@@ -101,9 +101,10 @@ table {
   width: 10%;
   margin: 1% 0;
   min-width: 120px;
-  height: 180px;
+  height: 220px;
   background-color: #fff;
   text-align: center;
+  -webkit-box-shadow: 0px 0px 8px 0px #ddd;
   box-shadow: 0px 0px 8px 0px #ddd;
 }
 .menu h4 {
@@ -111,7 +112,7 @@ table {
   font-weight: 900;
   letter-spacing: -2.35px;
   font-size: 25px;
-  margin: 10px auto 25px;
+  margin: 10px auto 15px;
 }
 .menu #forget {
   background-color: #ff6666;
@@ -123,12 +124,23 @@ table {
   background-color: #ff5252;
   cursor: crosshair;
 }
+.menu #store {
+  background-color: yellow;
+  text-shadow: 0px 0px 3px #333;
+}
+.menu #store:hover {
+  background-color: #ffff80;
+}
+.menu #store:active {
+  background-color: #e5e600;
+}
 .player-info {
-  width: 10%;
-  min-width: 220px;
+  width: 8%;
+  min-width: 200px;
   padding: 1% 2%;
   height: 90%;
   margin: 1% 0 0 1%;
+  -webkit-box-shadow: 0px 0px 8px 0px #ddd;
   box-shadow: 0px 0px 8px 0px #ddd;
   background-color: #fff;
   text-align: center;
@@ -144,29 +156,30 @@ table {
   margin: 10px auto 25px;
 }
 .player-info .deet {
-  width: 60%;
-  padding: 6px 10px;
+  width: 50%;
+  padding: 5px 8px;
   min-width: 195px;
-  margin: 20px auto;
+  margin: 16px auto;
   border: 1px solid #ddd;
   border-radius: 3px;
-  box-shadow: 0 0 6px #ddd;
+  -webkit-box-shadow: 0 0 5px #ddd;
+  box-shadow: 0 0 5px #ddd;
 }
 .player-info .deet h2 {
   display: inline-block;
   padding: 0 10px;
   width: auto;
-  font-size: 18px;
+  font-size: 17px;
   font-family: sans-serif;
   font-weight: 900;
   letter-spacing: -1.15px;
   background-color: #fff;
   position: relative;
-  top: -20px;
+  top: -15px;
   margin: 0 auto;
 }
 .player-info .deet div.val {
-  font-size: 34px;
+  font-size: 28px;
   font-family: sans-serif;
   letter-spacing: -1.6px;
 }
@@ -195,16 +208,14 @@ table {
 .player-info .deet .prog-bar .inner#day-fill {
   background: #7e8e36;
   /* Old browsers */
-  background: -moz-linear-gradient(top, #7e8e36 0%, #657a09 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7e8e36), color-stop(100%, #657a09));
   /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top, #7e8e36 0%, #657a09 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #7e8e36 0%, #657a09 100%);
   /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #7e8e36 0%, #657a09 100%);
   /* IE10+ */
+  background: -webkit-gradient(linear, left top, left bottom, from(#7e8e36), to(#657a09));
   background: linear-gradient(to bottom, #7e8e36 0%, #657a09 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7e8e36', endColorstr='#657a09', GradientType=0);
@@ -214,16 +225,14 @@ table {
   width: 0%;
   background: #ff3b26;
   /* Old browsers */
-  background: -moz-linear-gradient(top, #ff3b26 0%, #e50000 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff3b26), color-stop(100%, #e50000));
   /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top, #ff3b26 0%, #e50000 100%);
   /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #ff3b26 0%, #e50000 100%);
   /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #ff3b26 0%, #e50000 100%);
   /* IE10+ */
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff3b26), to(#e50000));
   background: linear-gradient(to bottom, #ff3b26 0%, #e50000 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3b26', endColorstr='#e50000', GradientType=0);
@@ -278,6 +287,7 @@ table {
   min-width: 200px;
   height: 94%;
   margin: 1%;
+  -webkit-box-shadow: 0px 0px 8px 0px #ddd;
   box-shadow: 0px 0px 8px 0px #ddd;
   background-color: #fff;
   overflow-y: scroll;
@@ -299,6 +309,8 @@ table {
 }
 .main .projects .project {
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 25px 5%;
   border-bottom: 1px solid #eee;

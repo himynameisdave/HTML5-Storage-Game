@@ -36,6 +36,7 @@ function setupPlayer() 	{
 function btnSetup(p) {
 	setupForgetMe();
 	setupNxtDay(p);
+	setupHireBtn(p);
 };	
 
 //	Sets up the forget me btn
@@ -56,6 +57,13 @@ function setupNxtDay(p){
 			nxtClicked = true;
 		}
 	});
+};
+
+function setupHireBtn(p){
+	$('#hire').on('click',function(e){
+		e.stopPropagation();
+		showHireDialog(p);
+	});	
 };
 
 //	Important fxn that adds the stringified player pbject to localstorage
@@ -230,7 +238,6 @@ function checkIfClientExists(p,cli){
 function showModial(msg,p,dayEnd){
 
 	//see if there is a modial already
-
 	if($('body').find('.modial')){
 
 		var modNum = ($('.modial').length) + 1;
@@ -397,6 +404,25 @@ function updateLevel(p)	{
 };
 
 
+/*			SHOW HIRE DEVS LIST			*/
+function 		showHireDialog(p){
+
+	var hireModial = "<div id='hiremenu' class='modial'><div class='inner-modial'>";
+
+	hireModial += "<div>HIRE DEVS MENU TO COME!</div>";
+	hireModial += "<div id='close-hiremenu' class='btn'>Close</div></div></div>";
+	hireModial += "</div></div>";
+
+	$('body').append(hireModial);
+
+	$('#close-hiremenu').on('click',function(e){
+		e.stopPropagation();
+		$("#hiremenu").remove();
+	});
+
+};
+
+	
 
 
 //	returns how much xp is needed to reach the next level, as well as the total difference

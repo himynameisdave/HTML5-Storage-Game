@@ -30,11 +30,14 @@ function findMeAClient(l){
 function Player(name){
 	this.name  	= name;
 	this.lvl   	= 1;
-	this.xp	   	= 75;
+	this.xp	   	= 20;
 	this.money 	= 100;
 	this.devcap = 1;
 	this.day	= 1;
 	this.currentProjects = {};
+	this.offices = {
+		name: "Mom's Basement"
+	};
 };
 
 //	Project constructor
@@ -45,11 +48,56 @@ function Project(level){
 
 	this.days		= Math.round(this.funNum / 2);
 	this.daysLeft	= this.days; 
-	this.xpGiven	= this.funNum * rn(2,4)
-	this.billings	= this.funNum * rn(2,4) + this.xpGiven/2;
+	this.xpGiven	= this.funNum;
+	this.billings	= this.funNum * rn(2,4) + this.xpGiven/4;
 
 	this.client		= findMeAClient(lvl);
 
+
+};
+
+
+function Modial(type,title,msg){
+
+	this.type 	= type;
+	this.title 	= title;
+	this.msg 	= msg;
+
+	this.drawModial = function(){
+
+		if($('body').find('.modial')){
+
+			var modNum = ($('.modial').length) + 1;
+			var a = "<div id='modial-"+modNum+"' class='modial'><div class='inner-modial'>";
+			var b = "<div id='close-modial-"+modNum+"' class='btn'>Close</div></div></div>";
+			var mod = a+msg+b;
+			$('body').append(mod);
+			$( ('#close-modial-'+modNum) ).on('click',function(e){
+				e.stopPropagation();
+				closeModial(p,dayEnd,modNum);
+			});
+
+		}else{
+			var a = "<div id='modial-1' class='modial'><div class='inner-modial'>";
+			var b = "<div id='close-modial-1' class='btn'>Close</div></div></div>";
+			var mod = a+msg+b;
+			$('body').append(mod);
+			$('#close-modial-1').on('click',function(e){
+				e.stopPropagation();
+				closeModial(p,dayEnd,1);
+			});
+		}
+
+	};
+
+};
+
+function Developer(name, salary,unlockLvl){
+	this.name 		= name;
+	this.salary 	= salary;
+	this.unlockLvl 	= unlockLvl;
+
+	this.productivity = (this.salary/10);
 
 };
 
@@ -58,26 +106,26 @@ var lvlXpMult = 1.61803398875;
 // LevelsMap holds all data regarding how much XP is needed to reach each level
 levelsMap = {
 
-		'lvl1': 	75 	
-	,	'lvl2': 	Math.round(Math.pow(lvlXpMult, 9.5))
-	,	'lvl3': 	Math.round(Math.pow(lvlXpMult, 10))
-	,	'lvl4': 	Math.round(Math.pow(lvlXpMult, 10.5))
-	,	'lvl5': 	Math.round(Math.pow(lvlXpMult, 11))
-	,	'lvl6': 	Math.round(Math.pow(lvlXpMult, 11.5))
-	,	'lvl7': 	Math.round(Math.pow(lvlXpMult, 12))
-	,	'lvl8': 	Math.round(Math.pow(lvlXpMult, 12.5))
-	,	'lvl9': 	Math.round(Math.pow(lvlXpMult, 13))
-	,	'lvl10': 	Math.round(Math.pow(lvlXpMult, 13.5))
-	,	'lvl11': 	Math.round(Math.pow(lvlXpMult, 14))
-	,	'lvl12': 	Math.round(Math.pow(lvlXpMult, 14.5))
-	,	'lvl13': 	Math.round(Math.pow(lvlXpMult, 15))
-	,	'lvl14': 	Math.round(Math.pow(lvlXpMult, 15.5))
-	,	'lvl15': 	Math.round(Math.pow(lvlXpMult, 16))
-	,	'lvl16': 	Math.round(Math.pow(lvlXpMult, 16.5))
-	,	'lvl17': 	Math.round(Math.pow(lvlXpMult, 17))
-	,	'lvl18': 	Math.round(Math.pow(lvlXpMult, 17.5))
-	,	'lvl19': 	Math.round(Math.pow(lvlXpMult, 18))
-	,	'lvl20': 	Math.round(Math.pow(lvlXpMult, 18.5))
+		'lvl1': 	20
+	,	'lvl2': 	20 		* 2 	// 	40 		(diff: 20)
+	,	'lvl3': 	26 		* 3 	//	78		(diff: 38)
+	,	'lvl4': 	42		* 4 	//	168		(diff: 90)
+	,	'lvl5': 	69 		* 5 	//  345		(diff: 177)
+	,	'lvl6': 	111 	* 6 	//	
+	,	'lvl7': 	179		* 7 	//
+	,	'lvl8': 	290		* 8 	//
+	,	'lvl9': 	470		* 9 	//
+	,	'lvl10': 	760		* 10 	//
+	,	'lvl11': 	1230	* 11	//
+	,	'lvl12': 	1989	* 12 	//
+	,	'lvl13': 	3220	* 13 	//
+	,	'lvl14': 	5210	* 14 	//
+	,	'lvl15': 	8429	* 15 	//
+	,	'lvl16': 	13640	* 16 	//
+	,	'lvl17': 	22069	* 17 	//
+	,	'lvl18': 	35709	* 18 	//
+	,	'lvl19': 	57777	* 19 	//	
+	,	'lvl20': 	93486	* 20 	//
 
 };
 
@@ -132,6 +180,37 @@ clientsMap = {
 	,	'lvl20': 	["Smoke's Poutine","Honest Ed's","TTC"]
 
 };
+
+developers = [
+		//Sweet name generator found here:
+		//http://www.behindthename.com/
+		
+		new Developer('Johnny Smith'	,10,3),
+		new Developer('Roswell Brooks'	,15,3),
+		new Developer('Hubert Knight'	,20,3),
+
+		new Developer('Leslie Kersey'	,30,5),
+		new Developer('Fran Atkinson'	,35,6),
+		new Developer('Chris Babcock'	,40,6),
+
+		new Developer('Luana Rowe'		,50,8),
+		new Developer('Fran Atkinson'	,55,9),
+		new Developer('Dederick Fashingbauer'	,65,10),
+
+
+		new Developer('George Lindsay'	,75,12),
+		new Developer('Ithel Wash'		,80,13),
+		new Developer('Xzavier Dickinson'	,85,14),
+
+		new Developer('Gabriel Read'	,75,15),
+		new Developer('Harper Stafford'	,80,16),
+		new Developer('Dani Turnbull'	,85,17),
+
+		new Developer('Svjetlana Bruno'	,100,18),
+		new Developer('Gaggond Daimbeng'	,120,19),
+		new Developer('Pitchforksower Stern'	,150,20),
+
+];
 
 randomPhrases = [
 	
